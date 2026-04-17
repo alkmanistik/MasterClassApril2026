@@ -614,6 +614,42 @@ class UtilsTest {
         executeTest(user, expectedError);
     }
 
+    @Test
+    @DisplayName("Все null")
+    void testAllNullError() {
+        User user = new User(
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        List<FormError> expectedError = new ArrayList<>();
+        expectedError.add(FormError.NAME_ERROR);
+        expectedError.add(FormError.AGE_ERROR);
+        expectedError.add(FormError.GENDER_ERROR);
+        expectedError.add(FormError.PHONE_ERROR);
+        expectedError.add(FormError.EMAIL_ERROR);
+
+        executeTest(user, expectedError);
+    }
+
+    @Test
+    @DisplayName("Сам пользователь null")
+    void testNullError() {
+        User user = null;
+
+        List<FormError> expectedError = new ArrayList<>();
+        expectedError.add(FormError.NAME_ERROR);
+        expectedError.add(FormError.AGE_ERROR);
+        expectedError.add(FormError.GENDER_ERROR);
+        expectedError.add(FormError.PHONE_ERROR);
+        expectedError.add(FormError.EMAIL_ERROR);
+
+        executeTest(user, expectedError);
+    }
+
     private void executeTest(User user, List<FormError> expected) {
         List<String> actual = utils.validateUser(user);
 
